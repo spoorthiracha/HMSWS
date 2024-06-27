@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon"
+    href="{% static 'logo.png' %}">
+    <meta charset="UTF-8">
+    <title>Add Treatment</title>
+  <!-- <link rel="stylesheet" href="{% static 'styles.css' %}"></link> -->
+  <style>
+    table {
+        border-collapse: collapse;
+        border-color: black;
+        margin: 20px auto;
+        width: 80%;
+        max-width: 800px;
+        font-size: 20px;
+    }
+    h2 {
+        /* background-color: rgba(8, 67, 134, 0.8); */
+        position: absolute;
+        left: 800px;
+        color:rgba(8, 67, 134, 0.8);
+        /* text-align: center; */
+        /* max-width: 200px; */
+        padding: 20px;
+        margin-top: 0;
+        /* width: 100%; */
+        font-size: 30px;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #969595;
+        /* border:1px solid rgb(73, 71, 71); */
+    }
+
+    th {
+        background-color: #f2f2f2;
+    }
+    form {
+        margin: 20px auto;
+        max-width: 700px;
+        display: flex;
+        flex-direction: column;
+    }
+
+
+    label {
+        margin-bottom: 10px;
+        font-size: 20px;
+    }
+
+    select {
+        max-width: 100px;
+        padding: 9px;
+        margin-bottom: 17px;
+        box-sizing: border-box;
+        border: 1px solid #363434;
+        border-radius: 5px;
+        font-size: 20px;
+    }
+
+    input[type="text"] {
+        padding: 10px;
+        margin-bottom: 25px;
+        border-radius: 5px;
+        border: 1px solid #363434;
+        font-size: 22px;
+        /* width: 250px; */
+        max-width: 500px;
+    }
+
+    button[type="add"] {
+        background-color: green;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        max-width: 250px;
+        font-size: 22px;
+            
+    }
+
+    button[type="add"]:hover {
+        background-color: #2d862d;
+    }
+#calendar {
+height: 500px;
+}
+section {
+margin-bottom = 5px;
+}
+</style>
+</head>
+<body>
+    <header style="background-color:rgba(8, 67, 134, 0.8);color: #fff;padding: 10px;text-align: center ;">
+		<h1>Add Administered Treatment</h1>
+	</header>
+<div class="page">
+    <form method="POST">
+        {% csrf_token %}
+    <label for="t_type" >Treatment Name</label>
+    <input type="text" id="t_type" name="t_type" required>
+        <button type="add" >submit</button>
+<!--    <a href="../addTest"><button type="add" >Add Test Results</button></a>-->
+<!--    <a href="../showTreatment"><button type="add" >Show Treatments</button></a>-->
+    </form>
+</div>
+<form action="{% url 'findpatient' %}" >
+    <button type="add" >Back</button>
+</form>
+</body>
+</html>

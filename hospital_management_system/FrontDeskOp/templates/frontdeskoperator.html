@@ -1,0 +1,98 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon"
+    href="{% static 'logo.png' %}">
+	<title>Front Desk Operator Dashboard</title>
+    <link rel="icon" type="image/png" href="{% static 'images/receptionist.png'%}">
+	<link rel="stylesheet" type="text/css" href="{% static 'style.css'%}">
+    <style>
+    /* Banner Styles */
+		.banner {
+			background-color: rgba(8, 67, 134, 0.8);
+			color: #fff;
+			padding: 10px;
+			text-align: center;
+            margin-bottom: 0px;
+		}
+
+		.banner h1 {
+			font-size: 25px;
+			margin-bottom: 10px;
+		}
+
+		.banner p {
+			font-size: 25px;
+		}
+    /* nav styles */
+     nav {
+            background-color: whitesmoke;
+            padding: 45px;
+            width: 220px;
+            margin-top: none;            
+            height:100%;
+
+     }
+        
+     nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0px;
+            display: flex;
+            flex-direction: column;
+            border: 2px;
+            font-size: 24px;
+            color: rgba(8, 67, 134, 0.8);
+    }
+    /* back-ground image */
+    body {
+        background-image: url('{% static "images/patient_doctor.jpg"%}');
+        background-repeat: no-repeat;
+        background-attachment: fixed;  
+        background-size: cover;
+      }
+    /* footer style */
+    footer {
+        background-color: #333;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        bottom: 0;
+        position: absolute;
+        width: 100%;
+    }
+    </style>
+</head>
+
+<body>
+    <section class="banner">
+        <div class="container">
+            <h1>Welcome to the Front Desk Operator Website</h1>
+            <p>We are dedicated to providing the best possible service to our patients</p>
+        </div>
+    </section>
+	<nav>
+		<ul>
+            <h2 style="text-align:center"> Dashboard</h2>
+			<li style="margin-top:20px;margin-bottom:15px;"><a href="/">Logout</a></li>
+			<li style="margin-top:15px;margin-bottom:15px;"><a href="patient_reg.html">Patient Registration</a></li>
+			<li style="margin-top:15px;margin-bottom:15px;"><a href="patient_dis.html">Patient Discharge</a></li>
+			<li style="margin-top:15px;margin-bottom:15px;"><a href="doctor_appt.html">Doctor Appointment</a></li>
+			<li style="margin-top:15px;margin-bottom:15px;"><a href="test_scheduling.html">Test Scheduling</a></li>
+			<li style="margin-top:15px;margin-bottom:15px;"><a href="assign_room.html">Assign Room</a></li>
+			<li style="margin-top:15px;margin-bottom:40px;"><a href="treatment_scheduling.html">Treatment Scheduling</a></li>
+		</ul>
+	</nav>
+	<footer>
+	 <p style="margin-top: 1px;margin-bottom:1px">© 2023 Front Desk Operator Website. All Rights Reserved.</p>
+	</footer>
+    
+    <!-- <form action="{% url 'login' %}" >
+        <input type="submit" value="Back">
+    </form> -->
+
+</body>
+
+</html>

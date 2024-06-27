@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link rel="shortcut icon" type="image/x-icon"
+    href="{% static 'logo.png' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border-color: black;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            font-size: 20px;
+        }
+        h2 {
+            /* background-color: rgba(8, 67, 134, 0.8); */
+            position: absolute;
+            left: 800px;
+            color:rgba(8, 67, 134, 0.8);
+            /* text-align: center; */
+            /* max-width: 200px; */
+            padding: 20px;
+            margin-top: 0;
+            /* width: 100%; */
+            font-size: 30px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #969595;
+            /* border:1px solid rgb(73, 71, 71); */
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+        form {
+            margin: 20px auto;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        label {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        select {
+            max-width: 100px;
+            padding: 9px;
+            margin-bottom: 17px;
+            box-sizing: border-box;
+            border: 1px solid #363434;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            font-size: 22px;
+            /* width: 250px; */
+            max-width: 500px;
+        }
+
+        button[type="add"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 250px;
+            font-size: 22px;
+                
+        }
+
+        button[type="add"]:hover {
+            background-color: #2d862d;
+        }
+    #calendar {
+    height: 500px;
+    }
+    section {
+    margin-bottom = 5px;
+    }
+    </style>
+</head>
+<body>
+<header style="background-color: rgba(8, 67, 134, 0.8);color: #fff;padding: 10px; text-align: center;">
+		<h1>Test Results</h1>
+	</header>
+
+	<main>
+		<section>
+<table>
+    <thead>
+    <tr>
+        <th colspan="4">Tests Done Previously</th>
+				</tr>
+				<tr>
+					<th>Test Type</th>
+					<th>Appointment ID</th>
+					<th>Date</th>
+					<th>Result</th>
+				</tr>
+    </thead>
+			<tbody>
+			{% for test in tests %}
+				<tr>
+					<td>{{test.4}}</td>
+					<td>{{test.2}}</td>
+					<td>{{test.3}}</td>
+					<td>{{test.5}}</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+            
+</table>
+<hr style="color:rgba(8, 67, 134, 0.8); height: 8px; background: rgba(8, 67, 134, 0.8);">
+			<h2 style="text-align:left; color: rgba(8, 67, 134, 0.8); font-size: 30px;">Add Tests</h2><br><br><br>
+            <hr style="color:rgba(8, 67, 134, 0.8);">
+</section>
+<!--		<section>-->
+<!--			<form method="POST">-->
+<!--				{% csrf_token %}-->
+<!--				<label for="patient_id" >Patient ID:</label>-->
+<!--        		<input type="text" id="patient_id" name="patient_id" required >-->
+<!--    			<label for="app_id" >Appointment ID:</label>-->
+<!--    			<input type="text" id="app_id" name="appid" required>-->
+<!--				<button type="add" name="add_treatment">Show Previous </button>-->
+<!--			</form>-->
+<!--		</section>-->
+<!--		<h2>Add Test</h2>-->
+		<section >
+            <br><br>
+			<form method="POST">
+				{% csrf_token %}
+				<!-- <label for="patient_id1" >Patient ID:</label>
+        		<input type="text" id="patient_id1" name="patient_id" required >
+    			<label for="app_id1" >Appointment ID:</label>
+    			<input type="text" id="app_id1" name="appid" required> -->
+                
+				<label for="test_type">Test Type:</label>
+				<input type="text" id="test_type" name="test_type" required><br><br>
+				<label for="test_result">Test Result:</label>
+				<input type="text" id="test_result" name="test_result" required><br><br>
+				<button type="add" >Add</button>
+			</form>
+            <form action="{% url 'findpatient' %}" >
+                <button type="add" >Back</button>
+            </form>
+		</section>
+
+	</main>
+
+</body>
+</html>

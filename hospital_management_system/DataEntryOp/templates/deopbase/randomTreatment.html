@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'logo.png' %}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+            font-size: 22px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            font-size: 22px;
+            /* width: 250px; */
+            max-width: 500px;
+        }
+
+        /* button[type=add] {
+    background-color: #4CAF50;
+    color: #fff;
+    border: 1px;
+    padding: 17px;
+    cursor: pointer;
+    font-size: 24px;
+    border-radius: 0.5pc;
+    border-color: black;
+    } */
+        button[type="add"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 250px;
+            font-size: 22px;
+
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 700px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        label {
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        button[type=add]:hover {
+            background-color: #26642b;
+        }
+
+        #calendar {
+            height: 500px;
+        }
+    </style>
+</head>
+
+<body>
+    <header style="background-color:rgba(8, 67, 134, 0.8);color: #fff;padding: 10px;text-align: center ;">
+        <h1>Treatment Table</h1>
+    </header>
+
+    <main>
+        <!--		<section>-->
+        <!--			<form method="POST">-->
+        <!--				{% csrf_token %}-->
+        <!--			<label for="patient_id" >Patient ID:</label>-->
+        <!--			<input type="text" id="patient_id" name="patient_id" required >-->
+        <!--			<label for="app_id" >Appointment ID:</label>-->
+        <!--			<input type="text" id="app_id" name="appid" required>-->
+        <!--			<button type="add">Show</button>-->
+        <!--			</form>-->
+        <!--		</section>-->
+        <!--		<section>-->
+        <br><br>
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="3">Treatments Done Previously</th>
+                </tr>
+                <tr>
+                    <th>Patient ID</th>
+                    <th>Treatment Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for treatment in treatments %}
+                <tr>
+                    <td>{{treatment.0}}</td>
+                    <td>{{treatment.2}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!--			<h2>Previous Treatments</h2>-->
+        <!--</section>-->
+        <!--		<section>-->
+        <!--			<table>-->
+        <!--				<thead>-->
+        <!--				<tr>-->
+        <!--					<th>-->
+        <!--						-->
+        <!--					</th>-->
+        <!--				</tr>-->
+        <!--				</thead>-->
+        <!--				<tbody>-->
+        <!--				{{% for treatment in treatments %}-->
+        <!--				<tr>-->
+        <!--					<td>-->
+        <!--						-->
+        <!--					</td>-->
+        <!--				</tr>-->
+        <!--				{{% endfor %}-->
+        <!--				</tbody>-->
+        <!--			</table>-->
+        <header style="background-color:rgba(8, 67, 134, 0.8);color: #fff;padding: 10px;text-align: center ;">
+            <h1>Add Administered Treatment</h1>
+        </header>
+        <div class="page">
+            <form method="POST">
+                {% csrf_token %}
+                <label for="t_type">Treatment Name</label>
+                <input type="text" id="t_type" name="t_type" required>
+                <button type="add">submit</button>
+                <!--    <a href="../addTest"><button type="add" >Add Test Results</button></a>-->
+                <!--    <a href="../showTreatment"><button type="add" >Show Treatments</button></a>-->
+            </form>
+        </div>
+        <form action="{% url 'findpatient' %}">
+            <button type="add">Back</button>
+        </form>
+
+        </section>
+    </main>
+
+</body>
+
+</html>

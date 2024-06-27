@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Login Form</title>
+	<style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #f1f1f1;
+		}
+
+		.container {
+			margin: 50px auto;
+			width: 300px;
+			background-color: #fff;
+			padding: 20px;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+		}
+		.heading {
+			background-color: #4CAF50;
+			color: white;
+			padding: 1px;
+			text-align: center;
+			font-size: 13px;
+			font-weight:bold;
+            border: none;
+			border-radius: 5px;
+		}
+
+		h2 {
+			text-align: center;
+			margin-bottom: 20px;
+		}
+
+		input[type=text], input[type=password] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		button {
+			background-color: #4CAF50;
+			color: white;
+			padding: 14px 20px;
+			margin: 8px 0;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			width: 100%;
+		}
+
+		button:hover {
+			background-color: #45a049;
+		}
+
+		.cancelbtn {
+			width: auto;
+			padding: 10px 18px;
+			background-color: #f44336;
+		}
+
+		.imgcontainer {
+			text-align: center;
+			margin: 24px 0 12px 0;
+			position: relative;
+		}
+
+		img.avatar {
+			width: 100px;
+			border-radius: 50%;
+		}
+
+		.container form {
+			margin-top: 20px;
+		}
+
+		.container label {
+			font-weight: bold;
+		}
+
+		.container input[type=checkbox] {
+			margin-top: 16px;
+		}
+
+		.container span.psw {
+			float: right;
+			padding-top: 16px;
+		}
+
+		/* Change styles for span and cancel button on extra small screens */
+		@media screen and (max-width: 300px) {
+			.cancelbtn {
+				width: 100%;
+			}
+			.container span.psw {
+				display: block;
+				float: none;
+			}
+		}
+	</style>
+		<script>
+			window.onload = function() {
+				alert("Wrong Login Credentials!");
+			};
+		</script>
+</head>
+<body>
+	<div class="container">
+		<div class="heading"><h2>Login</h2></div>
+	
+		<form method="POST">
+			{% csrf_token %}
+			<div class="imgcontainer">
+				<img src="{% static 'doctor_images/avatar.png' %}" alt="Avatar" class="avatar">
+			</div>
+			<label for="username"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="username" required>
+
+			<label for="password"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="password" required>
+
+			<button type="submit">Login</button>
+			<label>
+				<input type="checkbox"  name="remember"> Remember me
+			</label>
+		</form>
+		
+	</div>
+</body>
+</html>

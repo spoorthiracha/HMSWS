@@ -1,0 +1,163 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon"
+    href="{% static 'logo.png' %}">
+	<title>Assign Room</title>
+    <link rel="icon" type="image/png" href="{% static 'images/receptionist.png'%}">
+	<!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}"> -->
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            font-size: 26px;
+        }
+
+        h1 {
+            background-color: rgba(8, 67, 134, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;
+        }
+        h2 {
+            /* background-color: rgba(8, 67, 134, 0.8); */
+            color:rgba(8, 67, 134, 0.8);
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;
+            width: 400px;
+            font-size: 26px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        select {
+            max-width: 100px;
+            padding: 9px;
+            margin-bottom: 17px;
+            box-sizing: border-box;
+            border: 1px solid #363434;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            font-size: 22px;
+            /* width: 250px; */
+            max-width: 300px;
+        }
+        input[type="int"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #353434;
+            width: 80px;
+            font-size: 22px;
+        }
+        input[id="diagnosis"]{
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            /* width: 250px; */
+            max-width: 500px;
+        }
+
+        input[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 250px;
+            font-size: 22px;
+                
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2d862d;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <header>
+            <h1>Assign Room</h1>
+        </header>
+        <h2>Available Rooms:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Room Number</th>
+                    <th>Room Type</th>
+                </tr>
+            </thead>
+            <tbody><td>
+                {% for x in room_list %}
+                <tr>
+                    <td>{{x.0}}</td>
+                    <td>{{x.1}}</td>
+                </tr><td>
+                {% endfor %}
+                
+            </td></td></tbody>
+        </table>
+        <form method="post">
+            {% csrf_token %}
+            <label for="pid">Patient ID:</label>
+            <input type="int" id="pid" name="pid"><br><br>
+            <label for="roomtype">Room Type:</label>
+            <select id="roomtype" name="roomtype">
+            <option value="General Ward">General Ward</option>
+            <option value="Emergency Ward">Emergency Ward</option>
+            <option value="ICU">ICU</option>
+            <option value="Personal Room">Personal Room</option>
+            </select><br><br>
+            <label for="roomnum">Room Number:</label>
+            <input type="int" id="roomnum" name="roomnum"><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        <form action="{% url 'frontdeskop' %}" >
+            <input type="submit" value="Back">
+        </form>
+    </section>
+</body>
+
+</html>

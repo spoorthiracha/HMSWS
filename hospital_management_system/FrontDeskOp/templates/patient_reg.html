@@ -1,0 +1,149 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon"
+    href="{% static 'logo.png' %}">
+    <title>Patient Registration</title>
+    <link rel="icon" type="image/png" href="{% static 'images/receptionist.png'%}">
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'style.css'%}"> -->
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+            font-size: 26px;
+        }
+
+        h1 {
+            background-color: rgba(8, 67, 134, 0.8);
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+            width: 80%;
+            max-width: 800px;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin: 20px auto;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+
+        label {
+            margin-bottom: 10px;
+        }
+
+        select {
+            max-width: 100px;
+            padding: 9px;
+            margin-bottom: 17px;
+            box-sizing: border-box;
+            border: 1px solid #363434;
+            border-radius: 5px;
+            font-size: 20px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            font-size: 22px;
+            /* width: 250px; */
+            max-width: 300px;
+        }
+        input[type="int"] {
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #353434;
+            width: 80px;
+            font-size: 22px;
+        }
+        input[id="diagnosis"]{
+            padding: 10px;
+            margin-bottom: 25px;
+            border-radius: 5px;
+            border: 1px solid #363434;
+            /* width: 250px; */
+            max-width: 500px;
+        }
+
+        button[type="submit"] {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            max-width: 250px;
+            font-size: 22px;
+                
+        }
+
+        button[type="submit"]:hover {
+            background-color: #2d862d;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <header>
+            <h1>Patient Registration</h1>
+        </header>
+            
+    <script>
+     function showMessage() {
+        // Do something with the form data, such as saving it to a database.
+        alert('Patient Registered Successfully!!');
+      }     
+    </script>
+
+    
+        <!-- <p id="prompt" style="font-size: large;"> Registered Succdessfully!! </p> -->
+        <form method="post"  id="myForm">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name"  required><br><br>
+            <label for="gender">Gender:</label>
+            <select id="gender" name="gender" required>
+                <option value="M" style="font-size: 20x;">Male</option>
+                <option value="F"style="font-size: 20x;">Female</option>
+                <option value="O"style="font-size: 20x;">Other</option>
+            </select><br><br>
+            <label for="age">Age:</label>
+            <input type="int" id="age" name="age" required><br><br>
+            <label for="phone">Phone:</label>
+            <input type="text" id="phone" name="phone" maxlength="10" required><br><br>
+            <label for="diagnosis">Diagnosis:</label>
+            <input type="text" id="diagnosis" name="diagnosis"><br><br>
+            <button type="submit" >submit</button>
+        </form>
+        <form action="{% url 'frontdeskop' %}" >
+            <button type="submit" >Back</button>
+        </form>
+    </section>
+</body>
+
+</html>

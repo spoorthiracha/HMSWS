@@ -1,0 +1,302 @@
+-- Write the DROP commands as your need to drop the tables and then create the tables again.
+DROP TABLE Prescribes_Medication;
+DROP TABLE Prescribes_Treatment;
+DROP TABLE Prescribes_Test;
+DROP TABLE Appointment;
+DROP TABLE Patient;
+DROP TABLE Doctor;
+DROP TABLE FrontDeskOp;
+DROP TABLE DataEntryOp;
+DROP TABLE DbAdmin;
+
+CREATE TABLE Doctor(EmployeeID int NOT NULL,Name varchar(30) NOT NULL,Department varchar(30) NOT NULL,Email varchar(30) NOT NULL,Phone varchar(13) NOT NULL,Password varchar(30) NOT NULL,Working int NOT NULL,PRIMARY KEY(EmployeeID));
+CREATE TABLE FrontDeskOp(Username varchar(30) NOT NULL,
+                         Password varchar(30) NOT NULL,
+                         Email varchar(30) NOT NULL,
+                         Name varchar(30) NOT NULL,
+                         PRIMARY KEY(Username));
+CREATE TABLE DataEntryOp(Username varchar(30) NOT NULL,
+                         Password varchar(30) NOT NULL,
+                         Email varchar(30) NOT NULL,
+                         Name varchar(30) NOT NULL,
+                         PRIMARY KEY(Username));
+CREATE TABLE DbAdmin(Username varchar(30) NOT NULL,
+                     Password varchar(30) NOT NULL,
+                     PRIMARY KEY(Username));
+
+INSERT INTO Doctor VALUES
+(1,'anirudh','General Surgeon','anirudhaitipamula@gmail.com','94572877742','123', 1),
+(2,'vinod','Orthopedicican','vinod345@gmail.com','6302548792','234', 1),
+(3,'shalini','Pediatrician','shalini@gmail.com','8416544713','345', 1);
+
+INSERT INTO FrontDeskOp VALUES
+('arjun', '123', 'arjun@gmail.com', 'Arjuna K'),
+('karen', '1234', 'karena@gmail.com', 'Karen Jr.'),
+('mohan', '12345', 'kishore@gmail.com', 'Mohan Kishore'),
+('namo', '123456', 'narendra@gmail.com', 'Narendra Modi');
+
+INSERT INTO DataEntryOp VALUES
+('aditya','123', 'aditya@gmail.com', 'Aditya'),
+('kumar', '1234', 'kumara@gmail.com', 'Kumar');
+
+INSERT INTO DbAdmin VALUES
+('syam','123');
+
+CREATE TABLE Patient(PatientID int NOT NULL AUTO_INCREMENT,
+                     Name varchar(255) NOT NULL,
+                     Gender varchar(1) NOT NULL,
+                     Age int NOT NULL,
+                     Phone varchar(255) NOT NULL,
+                     Diagnosis varchar(255) NOT NULL,
+                     PRIMARY KEY(PatientID));
+INSERT INTO Patient VALUES (1, 'Rahul','M', 25,'8759658745', 'bone fracture');
+INSERT INTO Patient VALUES (2, 'Pinky', 'F', 35, '4444658745', 'fever,cold,cough');
+INSERT INTO Patient VALUES  (3, 'Likhitha', 'F', 15, '5368768888', 'allergy');
+INSERT INTO Patient VALUES  (4, 'Vijay', 'M', 20, '9999999999', 'Headache, nausea, weakness');
+
+CREATE TABLE Appointment (  AppointmentID int NOT NULL AUTO_INCREMENT, 
+                            Doctor int NOT NULL,
+                            Patient int NOT NULL,
+                            Date date NOT NULL,
+                            StartTime time NOT NULL,
+                            PRIMARY KEY (AppointmentID),
+                            FOREIGN KEY (Doctor) REFERENCES Doctor(EmployeeID),
+                            FOREIGN KEY (Patient) REFERENCES Patient(PatientID));
+
+INSERT INTO Appointment VALUES(1,3,3,'2023-03-04','3:00');
+INSERT INTO Appointment VALUES(2,1,2,'2022-10-15','11:00');
+INSERT INTO Appointment VALUES(3,1,4,'2022-11-05','4:00');
+INSERT INTO Appointment VALUES(4,2,1,'2023-02-28','10:00');
+
+CREATE TABLE Prescribes_Medication(Doctor int NOT NULL,
+                                    Patient int NOT NULL,
+                                    Appointment int NOT NULL,
+                                    Medication varchar(255) NOT NULL,
+                                    PRIMARY KEY (Doctor, Patient, Appointment),
+                                    FOREIGN KEY (Doctor) REFERENCES Doctor(EmployeeID),
+                                    FOREIGN KEY (Patient) REFERENCES Patient(PatientID),
+                                    FOREIGN KEY (Appointment) REFERENCES Appointment(AppointmentID));
+
+INSERT INTO Prescribes_Medication VALUES(1,2,2,'Paracetamol');
+INSERT INTO Prescribes_Medication VALUES(1,4,3,'Zincovit');
+INSERT INTO Prescribes_Medication VALUES(2,1,4,'Vitamin D');
+INSERT INTO Prescribes_Medication VALUES(3,3,1,'Crocin');
+
+CREATE TABLE Prescribes_Treatment(Doctor int NOT NULL,
+                                    Patient int NOT NULL,
+                                    Appointment int NOT NULL,
+                                    Date DATE NOT NULL,
+                                    Treatment varchar(255) NOT NULL,
+                                    PRIMARY KEY (Doctor, Patient, Appointment,Date),
+                                    FOREIGN KEY (Doctor) REFERENCES Doctor(EmployeeID),
+                                    FOREIGN KEY (Patient) REFERENCES Patient(PatientID),
+                                    FOREIGN KEY (Appointment) REFERENCES Appointment(AppointmentID));
+
+INSERT INTO Prescribes_Treatment VALUES(1,2,2,'2022-10-15','Rest');
+INSERT INTO Prescribes_Treatment VALUES(1,4,3,'2022-11-05','Steam Breathing');
+INSERT INTO Prescribes_Treatment VALUES(2,1,4,'2023-02-28','Rest');
+INSERT INTO Prescribes_Treatment VALUES(3,3,1,'2023-03-04','Massage');
+
+CREATE TABLE Prescribes_Test(Doctor int NOT NULL,
+                             Patient int NOT NULL,
+                             Appointment int NOT NULL,
+                             Date DATE NOT NULL,
+                             Test varchar(255) NOT NULL,
+                             Results varchar(1000),
+                             PRIMARY KEY (Doctor, Patient, Appointment,Date),
+                             FOREIGN KEY (Doctor) REFERENCES Doctor(EmployeeID),
+                             FOREIGN KEY (Patient) REFERENCES Patient(PatientID),
+                             FOREIGN KEY (Appointment) REFERENCES Appointment(AppointmentID));
+
+INSERT INTO Prescribes_Test VALUES(1,2,2,'2022-10-15','Bloodtest',NULL);
+INSERT INTO Prescribes_Test VALUES(1,4,3,'2022-11-05','X-Ray',NULL);
+
+-- Mohan's part
+CREATE TABLE Room(Number int NOT NULL, Type varchar(50) NOT NULL, Available boolean NOT NULL, PRIMARY KEY(Number));
+
+INSERT INTO Room VALUES (120, 'General Ward', 1);
+INSERT INTO Room VALUES (121, 'Emergency Ward', 1);
+INSERT INTO Room VALUES (122, 'Emergency Ward', 1);
+INSERT INTO Room VALUES (123, 'Emergency Ward', 1);
+INSERT INTO Room VALUES (124, 'ICU', 1);
+INSERT INTO Room VALUES (125, 'ICU', 1);
+INSERT INTO Room VALUES (126, 'Personal Room', 1);
+INSERT INTO Room VALUES (127, 'Personal Room', 1);
+INSERT INTO Room VALUES (128, 'Personal Room', 1);
+INSERT INTO Room VALUES (129, 'Personal Room', 1);
+INSERT INTO Room VALUES (130, 'Personal Room', 1);
+INSERT INTO Room VALUES (131, 'Personal Room', 1);
+INSERT INTO Room VALUES (132, 'Personal Room', 1);
+
+CREATE TABLE Stay(Patient int NOT NULL, Room int NOT NULL, PRIMARY KEY(Patient, Room), FOREIGN KEY (Patient) REFERENCES Patient(PatientID), FOREIGN KEY (Room) REFERENCES Room(Number)); 
+CREATE TABLE Slots(Doctor int NOT NULL, Date date NOT NULL, StartTime time NOT NULL, EndTime time NOT NULL, Available boolean NOT NULL, FOREIGN KEY (Doctor) REFERENCES Doctor(EmployeeID), PRIMARY KEY(Doctor, Date, StartTime));
+
+CREATE TABLE SlotsforTests(Test varchar(100) NOT NULL, Date date NOT NULL, StartTime time NOT NULL, Available boolean NOT NULL, PRIMARY KEY(Test, Date, StartTime));
+CREATE TABLE SlotsforTreatments(Treatment varchar(100) NOT NULL, Date date NOT NULL, StartTime time NOT NULL, Available boolean NOT NULL, PRIMARY KEY(Treatment, Date, StartTime));
+CREATE TABLE Scheduled_Tests(Patient int NOT NULL, Test varchar(100) NOT NULL, Date date NOT NULL, StartTime time NOT NULL, PRIMARY KEY(Patient, Test, Date, StartTime));
+CREATE TABLE Scheduled_Treatments(Patient int NOT NULL, Treatment varchar(100) NOT NULL, Date date NOT NULL, StartTime time NOT NULL, PRIMARY KEY(Patient,Treatment, Date, StartTime));
+
+
+INSERT INTO Slots VALUES(1,'2023-03-06','9:00','10:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','10:00','11:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','11:00','12:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','14:00','15:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','15:00','16:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','16:00','17:00',1);
+INSERT INTO Slots VALUES(1,'2023-03-06','17:00','18:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','8:00','9:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','9:00','10:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','10:00','11:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','11:00','12:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','14:00','15:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','15:00','16:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','16:00','17:00',1);
+INSERT INTO Slots VALUES(2,'2023-03-06','17:00','18:00',1);
+
+
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','8:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','9:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','10:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','11:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','14:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','15:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','16:00',1);
+INSERT INTO SlotsforTests VALUES('Bloodtest','2023-03-06','17:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','8:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','9:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','10:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','11:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','14:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','15:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','16:00',1);
+INSERT INTO SlotsforTests VALUES('Urinetest','2023-03-06','17:00',1);
+
+INSERT INTO SlotsforTreatments VALUES('RootCanalTreatment','2023-03-06','8:00',1);
+INSERT INTO SlotsforTreatments VALUES('RootCanalTreatment','2023-03-06','11:00',1);
+INSERT INTO SlotsforTreatments VALUES('RootCanalTreatment','2023-03-06','15:00',1);
+INSERT INTO SlotsforTreatments VALUES('RootCanalTreatment','2023-03-06','17:00',1);
+INSERT INTO SlotsforTreatments VALUES('CataractSurgery','2023-03-06','8:00',1);
+INSERT INTO SlotsforTreatments VALUES('CataractSurgery','2023-03-06','11:00',1);
+INSERT INTO SlotsforTreatments VALUES('CataractSurgery','2023-03-06','15:00',1);
+INSERT INTO SlotsforTreatments VALUES('CataractSurgery','2023-03-06','17:00',1);
+INSERT INTO SlotsforTreatments VALUES('Surgery','2023-03-08','8:00',1);
+INSERT INTO SlotsforTreatments VALUES('Surgery','2023-03-08','11:00',1);
+INSERT INTO SlotsforTreatments VALUES('Surgery','2023-03-08','15:00',1);
+INSERT INTO SlotsforTreatments VALUES('Surgery','2023-03-08','17:00',1);
+
+CREATE TABLE AdministeredTreatments(Patient int NOT NULL, Appointment int NOT NULL, Treatment varchar(50) NOT NULL, PRIMARY KEY(Patient,Appointment,Treatment), FOREIGN
+KEY(Patient) REFERENCES Patient(PatientID),FOREIGN KEY(Appointment) REFERENCES Appointment(AppointmentID));
+
+--Triggers
+
+DELIMITER $$
+CREATE TRIGGER patient_age_trigger
+BEFORE INSERT
+ON Patient FOR EACH ROW
+BEGIN
+ DECLARE error_mesg VARCHAR(255);
+ SET error_mesg = ('Age is less than zero');
+ IF new.Age < 0 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+ END IF;
+END $$
+DELLIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER patient_phone_trigger
+BEFORE INSERT 
+ON Patient FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Phone Number length should be 10');
+  IF LENGTH(new.Phone) < 10 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER appointment_date_trigger
+BEFORE INSERT 
+ON Appointment FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Appointment cannot be scheduled in the Past');
+  IF new.Date < DATE(NOW()) THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER appointment_time_trigger
+BEFORE INSERT 
+ON Appointment FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Appointment can be scheduled only from the given list of slots');
+  IF new.StartTime < TIME(NOW()) OR MINUTE(new.StartTime) != 0 OR HOUR(new.StartTime) > 17 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER test_date_trigger
+BEFORE INSERT 
+ON Scheduled_Tests FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Test cannot be scheduled in the Past');
+  IF new.Date < DATE(NOW()) THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER test_time_trigger
+BEFORE INSERT 
+ON Scheduled_Tests FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Test can be scheduled only from the given list of slots');
+  IF new.StartTime < TIME(NOW()) OR MINUTE(new.StartTime) != 0 OR HOUR(new.StartTime) > 17 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER treatment_date_trigger
+BEFORE INSERT 
+ON Scheduled_Treatments FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Treatment cannot be scheduled in the Past');
+  IF new.Date < DATE(NOW()) THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER treatment_time_trigger
+BEFORE INSERT 
+ON Scheduled_Treatments FOR EACH ROW
+BEGIN 
+  DECLARE error_mesg VARCHAR(255);
+  SET error_mesg = ('Treatment can be scheduled only from the given list of slots');
+  IF new.StartTime < TIME(NOW()) OR MINUTE(new.StartTime) != 0 OR HOUR(new.StartTime) > 17 THEN
+SIGNAL SQLSTATE '45000'
+SET MESSAGE_TEXT = error_mesg;
+  END IF;
+END $$
+DELIMITER ;
